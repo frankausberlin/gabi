@@ -1,39 +1,10 @@
-# Gabi - Digital Companion
+# Gabi - (with a and i as in ai)
 
-👻 Personal AI assistant and voice companion for Frank (Fritz the Cat, C-Base Berlin).
+Gabi is an AI agent system.
 
-## Overview
-Gabi is a local, voice-enabled AI assistant running on Frank's hardware (RTX 4060 Ti, 40GB RAM). This repository contains all configuration, documentation, code, and how-to's for Gabi's development and operation.
+Gabi is a collection of subsystems and their configuration.
 
-## Features
-- **Local Whisper** for speech-to-text (RTX 4060 Ti optimized)
-- **TTS Integration** for natural voice responses
-- **Real-time conversation** with voice activity detection
-- **VS Code KiloCode integration** for pair programming
+## localai
 
-## Repository Structure
-```
-gabi/
-├── README.md                 # This file
-├── docs/                     # Documentation
-├── config/                   # Configuration files
-├── scripts/                  # Utility scripts
-├── voice/                    # Whisper & TTS implementation
-├── tests/                    # Test files
-└── how-to/                   # Step-by-step guides
-```
+The localai subsystem is used to deploy local models (rtx 4060ti, gigabyte k5 laptop). The OpenAI Realtime API (compatible) should be made available with local models.
 
-## Quick Start
-```bash
-cd ~/labor/gits/gabi
-# Installation and setup scripts to be added
-```
-
-## Hardware
-- **Host**: ubi (Gigabyte K5 Laptop)
-- **GPU**: NVIDIA RTX 4060 Ti
-- **RAM**: 40 GB
-- **Network**: 192.168.178.38
-
-## License
-MIT

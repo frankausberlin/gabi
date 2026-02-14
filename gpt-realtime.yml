@@ -1,0 +1,60 @@
+# Model Configuration - LocalAI Realtime Pipeline
+# Import-Vorlage für LocalAI Realtime API
+
+name: gpt-realtime
+backend: pipeline
+
+pipeline:
+  vad: silero-vad
+  transcription: whisper-1
+  llm: gpt-4
+  tts: tts-1
+
+# Parameter - basierend auf gpt-4.yaml
+parameters:
+  model: localai-functioncall-qwen2.5-7b-v0.5-q4_k_m.gguf
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 40
+  max_tokens: 2048
+
+# Context Size
+context_size: 4096
+
+# Template - wichtig für Qwen
+template:
+  chat: |
+    {{.Input -}}
+    <|im_start|>assistant
+  chat_message: |
+    <|im_start|>{{ .RoleName }}
+    {{ if .FunctionCall -}}
+    Function call:
+    {{ else if eq .RoleName "tool" -}}
+    Function response:
+    {{ end -}}
+    {{ if .Content -}}
+    {{.Content }}
+    {{ end -}}
+    {{ if .FunctionCall -}}
+    {{toJson .FunctionCall}}
+    {{ end -}}<|im_end|>
+  completion: |
+    {{.Input}}
+
+# Stopwords
+stopwords:
+  - <|im_end|>
+  - <dummy32000>
+  - </s>
+
+# Use cases
+known_usecases:
+  - chat
+  - completion
+
+# GPU Layers - RTX 4060 Ti (8GB) ~35 Layers
+gpu_layers: 35
+
+# Threads - K5 40GB RAM: 12 (CPU Threads)
+threads: 12
